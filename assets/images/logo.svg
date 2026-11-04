@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" width="240" height="50" fill="none">
+  <!-- Glowing Hex / Bug Terminal Glyph -->
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+
+  <!-- Icon Graphic -->
+  <g transform="translate(6, 6)">
+    <!-- Shield / Crucible Outline -->
+    <path d="M19 2L5 8V20C5 29 11 36 19 38C27 36 33 29 33 20V8L19 2Z" fill="#141a27" stroke="url(#brandGrad)" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Terminal Prompt / Flame inside -->
+    <path d="M12 15L17 20L12 25" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="20" y1="25" x2="26" y2="25" stroke="url(#brandGrad)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Small Refinery Spark / Node -->
+    <circle cx="19" cy="11" r="2.2" fill="#fbbf24"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="54" y="27" font-family="'Inter', -apple-system, sans-serif" font-weight="800" font-size="19" fill="#ffffff" letter-spacing="0.04em">
+    BUG<tspan fill="#f59e0b">REFINERY</tspan>
+  </text>
+  <text x="55" y="41" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="8.5" fill="#38bdf8" letter-spacing="0.25em">
+    BEYOND THEORY
+  </text>
+</svg>

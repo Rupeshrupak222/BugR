@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Students &amp; Graduates — Bug Refinery</title>
+  <meta name="description" content="You spent four years learning computer science. Bug Refinery spends the next few months turning that theory into the practical skills companies actually hire for.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            dark: {
+              950: '#07080c',
+              900: '#0a0b10',
+              850: '#0f131f',
+              800: '#141a27',
+              700: '#1e2638',
+            },
+            brand: {
+              amber: '#f59e0b',
+              amberLight: '#fbbf24',
+              cyan: '#06b6d4',
+              cyanLight: '#38bdf8',
+              emerald: '#10b981',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-dark-900 text-slate-100 font-sans antialiased selection:bg-amber-500/30 selection:text-amber-200">
+
+  <!-- Ambient Glow -->
+  <div class="glow-ambient bg-amber-500 w-[550px] h-[550px] top-[-100px] left-1/3 pulse-ambient"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-dark-950/80 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="assets/images/logo.svg" alt="Bug Refinery Logo" class="h-10 w-auto">
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="about.html" class="hover:text-amber-400 transition-colors">About</a>
+        <a href="labs.html" class="hover:text-amber-400 transition-colors">Labs</a>
+        <a href="foundry.html" class="hover:text-amber-400 transition-colors">Foundry</a>
+        <a href="companies.html" class="hover:text-amber-400 transition-colors">For Companies</a>
+        <a href="students.html" class="text-amber-400 font-semibold">For Students</a>
+        <a href="contact.html" class="hover:text-amber-400 transition-colors">Contact</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-4">
+        <a href="#waitlist" class="btn-primary text-sm py-2.5 px-5">Join Waitlist</a>
+      </div>
+
+      <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+
+    <div id="mobile-nav" class="hidden md:hidden bg-dark-950/95 border-b border-white/10 px-6 py-5 space-y-4">
+      <a href="about.html" class="block text-slate-300 hover:text-amber-400 py-1">About</a>
+      <a href="labs.html" class="block text-slate-300 hover:text-amber-400 py-1">Labs</a>
+      <a href="foundry.html" class="block text-slate-300 hover:text-amber-400 py-1">Foundry</a>
+      <a href="companies.html" class="block text-slate-300 hover:text-amber-400 py-1">For Companies</a>
+      <a href="students.html" class="block text-amber-400 font-semibold py-1">For Students</a>
+      <a href="contact.html" class="block text-slate-300 hover:text-amber-400 py-1">Contact</a>
+      <div class="pt-2">
+        <a href="#waitlist" class="btn-primary w-full text-center py-2.5 text-sm">Join Waitlist</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-grid-pattern relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="terminal-tag tag-amber mb-4">GRADUATE TO PRODUCTION ENGINEER</div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
+        Bridge the Gap Between Your Degree and Your <span class="text-gradient-amber">First Real Job</span>
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto">
+        You spent four years learning computer science. Bug Refinery spends the next few months turning that theory into the practical skills companies actually hire for.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="#waitlist" class="btn-primary text-sm py-3 px-6 shadow-xl shadow-amber-500/20">
+          Join the Waitlist &rarr;
+        </a>
+        <a href="labs.html" class="btn-secondary text-sm py-3 px-6">
+          See the Curriculum &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You Learn & Walk Away With -->
+  <section class="py-20 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="terminal-tag tag-cyan mb-3">CONCRETE DELIVERABLES</div>
+        <h2 class="text-3xl font-bold text-white tracking-tight">What Students Walk Away With</h2>
+        <p class="mt-3 text-slate-400 text-sm sm:text-base">
+          Stop submitting 500 cold resumes into the black hole. Prove your engineering readiness with public deliverables.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="glass-card p-6">
+          <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4 font-mono font-bold">
+            01
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Verified Skills Portfolio</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Documented lab completions, actual debugging assessments solved, and mentor-reviewed pull requests ready to share with employers.
+          </p>
+        </div>
+
+        <div class="glass-card p-6">
+          <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4 font-mono font-bold">
+            02
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Direct Employer Intros</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Direct connections to hiring partner companies, bypassing automated ATS screeners and cold LinkedIn applications.
+          </p>
+        </div>
+
+        <div class="glass-card p-6">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4 font-mono font-bold">
+            03
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Practical Interview Prep</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Mock technical interviews focusing on practical production debugging, system navigation, and code reviews rather than just LeetCode puzzles.
+          </p>
+        </div>
+
+        <div class="glass-card p-6">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 font-mono font-bold">
+            04
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Lifetime Community</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Lifetime access to an active community of alumni engineers, collaborative troubleshooting channels, and internal job referrals.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Waitlist Form Section -->
+  <section id="waitlist" class="py-20 bg-dark-950/80 border-t border-white/10">
+    <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="glass-card p-8 sm:p-10 border-amber-500/30 shadow-2xl">
+        <div class="text-center mb-8">
+          <div class="terminal-tag tag-amber mb-3">STUDENT EARLY ACCESS</div>
+          <h2 class="text-3xl font-bold text-white tracking-tight">Join the Waitlist</h2>
+          <p class="mt-2 text-slate-400 text-sm">
+            Cohorts are limited to ensure every participant receives senior engineer mentor reviews on their code.
+          </p>
+        </div>
+
+        <form id="student-waitlist-form" class="space-y-5">
+          <div>
+            <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Your Name *</label>
+            <input type="text" name="name" required placeholder="Alex Turner" class="w-full bg-dark-900 border border-white/15 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Email *</label>
+            <input type="email" name="email" required placeholder="alex@cs.university.edu" class="w-full bg-dark-900 border border-white/15 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Interested Track</label>
+            <select name="track" class="w-full bg-dark-900 border border-white/15 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+              <option>Python Full Stack (Django + React)</option>
+              <option>Java Full Stack (Spring Boot + Cloud)</option>
+              <option>Data Science &amp; Reproducibility</option>
+              <option>Embedded Systems &amp; Firmware</option>
+              <option>CATIA Mechanical CAD</option>
+              <option>AutoCAD Site Schematics</option>
+              <option>Business Analytics</option>
+              <option>Quality &amp; Safety Audits</option>
+              <option>Medical Coding</option>
+              <option>Bioinformatics</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-primary w-full py-3.5 text-sm font-semibold shadow-xl shadow-amber-500/20">
+            Join the Waitlist &rarr;
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark-950 border-t border-white/10 py-12 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>&copy; 2026 Bug Refinery. Beyond Theory. All rights reserved.</div>
+      <div>Support: <a href="mailto:support@bugrefinery.com" class="text-amber-400 hover:underline">support@bugrefinery.com</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

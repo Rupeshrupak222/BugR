@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Bug Refinery — Beyond Theory</title>
+  <meta name="description" content="Get in touch with Bug Refinery. Direct support at support@bugrefinery.com. Responses within one business day.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            dark: {
+              950: '#07080c',
+              900: '#0a0b10',
+              850: '#0f131f',
+              800: '#141a27',
+              700: '#1e2638',
+            },
+            brand: {
+              amber: '#f59e0b',
+              amberLight: '#fbbf24',
+              cyan: '#06b6d4',
+              cyanLight: '#38bdf8',
+              emerald: '#10b981',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-dark-900 text-slate-100 font-sans antialiased selection:bg-amber-500/30 selection:text-amber-200">
+
+  <!-- Ambient Glow -->
+  <div class="glow-ambient bg-amber-500 w-[550px] h-[550px] top-[-100px] left-1/2 -translate-x-1/2 pulse-ambient"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-dark-950/80 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="assets/images/logo.svg" alt="Bug Refinery Logo" class="h-10 w-auto">
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="about.html" class="hover:text-amber-400 transition-colors">About</a>
+        <a href="labs.html" class="hover:text-amber-400 transition-colors">Labs</a>
+        <a href="foundry.html" class="hover:text-amber-400 transition-colors">Foundry</a>
+        <a href="companies.html" class="hover:text-amber-400 transition-colors">For Companies</a>
+        <a href="students.html" class="hover:text-amber-400 transition-colors">For Students</a>
+        <a href="contact.html" class="text-amber-400 font-semibold">Contact</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-4">
+        <a href="index.html#waitlist" class="btn-primary text-sm py-2.5 px-5">Join Waitlist</a>
+      </div>
+
+      <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+
+    <div id="mobile-nav" class="hidden md:hidden bg-dark-950/95 border-b border-white/10 px-6 py-5 space-y-4">
+      <a href="about.html" class="block text-slate-300 hover:text-amber-400 py-1">About</a>
+      <a href="labs.html" class="block text-slate-300 hover:text-amber-400 py-1">Labs</a>
+      <a href="foundry.html" class="block text-slate-300 hover:text-amber-400 py-1">Foundry</a>
+      <a href="companies.html" class="block text-slate-300 hover:text-amber-400 py-1">For Companies</a>
+      <a href="students.html" class="block text-slate-300 hover:text-amber-400 py-1">For Students</a>
+      <a href="contact.html" class="block text-amber-400 font-semibold py-1">Contact</a>
+      <div class="pt-2">
+        <a href="index.html#waitlist" class="btn-primary w-full text-center py-2.5 text-sm">Join Waitlist</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-grid-pattern relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="terminal-tag tag-cyan mb-4">CONNECT WITH OUR TEAM</div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
+        Get in Touch with <span class="text-gradient-amber">Bug Refinery</span>
+      </h1>
+      <p class="mt-6 text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+        Have questions about our industry-simulation labs, hiring partners pipeline, or Foundry development wing? We’re here to help.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form & Info Grid -->
+  <section class="py-16 pb-28">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        
+        <!-- Info Sidebar -->
+        <div class="glass-card p-8 flex flex-col justify-between">
+          <div class="space-y-6">
+            <div>
+              <span class="text-xs font-mono uppercase text-amber-400 font-semibold tracking-wider">Direct Email</span>
+              <h3 class="text-lg font-bold text-white mt-1">support@bugrefinery.com</h3>
+              <p class="text-xs text-slate-400 mt-1">
+                We respond to all verified inquiries within one business day.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10">
+              <span class="text-xs font-mono uppercase text-cyan-400 font-semibold tracking-wider">Corporate Hiring</span>
+              <p class="text-xs text-slate-300 mt-1">
+                Hiring managers seeking pre-vetted junior engineering talent can submit specific team requirements directly.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10">
+              <span class="text-xs font-mono uppercase text-emerald-400 font-semibold tracking-wider">Foundry Projects</span>
+              <p class="text-xs text-slate-300 mt-1">
+                Looking for application development, system rescues, or dedicated engineering squads? Drop us a brief.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-8 border-t border-white/10 text-xs font-mono text-slate-500">
+            &gt; Bug Refinery. Beyond Theory.
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="glass-card p-8 sm:p-10 md:col-span-2 border-white/15">
+          <h3 class="text-2xl font-bold text-white mb-2">Send a Message</h3>
+          <p class="text-xs text-slate-400 mb-6">Fill out the form below and our team will get in touch promptly.</p>
+
+          <form id="contact-form" class="space-y-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Your Name *</label>
+                <input type="text" required placeholder="Jane Doe" class="w-full bg-dark-900 border border-white/15 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Email *</label>
+                <input type="email" required placeholder="jane@example.com" class="w-full bg-dark-900 border border-white/15 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Inquiry Category</label>
+              <select class="w-full bg-dark-900 border border-white/15 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+                <option>Student Waitlist / Lab Admissions</option>
+                <option>Corporate Hiring &amp; Talent Partnership</option>
+                <option>Foundry Software Development / Product Rescue</option>
+                <option>General Support &amp; Information</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Message *</label>
+              <textarea required rows="4" placeholder="How can we assist you?" class="w-full bg-dark-900 border border-white/15 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary w-full py-3.5 text-sm font-semibold shadow-xl shadow-amber-500/20">
+              Send Message &rarr;
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark-950 border-t border-white/10 py-12 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>&copy; 2026 Bug Refinery. Beyond Theory. All rights reserved.</div>
+      <div>Support: <a href="mailto:support@bugrefinery.com" class="text-amber-400 hover:underline">support@bugrefinery.com</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

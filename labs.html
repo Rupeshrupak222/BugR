@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industry-Simulation Labs — Bug Refinery</title>
+  <meta name="description" content="Explore Bug Refinery's 9-week industry-simulation labs across Tech, CAD, Management, and Medical domains. Debug real codebases and ship real deliverables.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            dark: {
+              950: '#07080c',
+              900: '#0a0b10',
+              850: '#0f131f',
+              800: '#141a27',
+              700: '#1e2638',
+            },
+            brand: {
+              amber: '#f59e0b',
+              amberLight: '#fbbf24',
+              cyan: '#06b6d4',
+              cyanLight: '#38bdf8',
+              emerald: '#10b981',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-dark-900 text-slate-100 font-sans antialiased selection:bg-amber-500/30 selection:text-amber-200">
+
+  <!-- Ambient Glow -->
+  <div class="glow-ambient bg-cyan-600 w-[500px] h-[500px] top-[-100px] right-1/4 pulse-ambient"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-dark-950/80 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="assets/images/logo.svg" alt="Bug Refinery Logo" class="h-10 w-auto">
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="about.html" class="hover:text-amber-400 transition-colors">About</a>
+        <a href="labs.html" class="text-amber-400 font-semibold">Labs</a>
+        <a href="foundry.html" class="hover:text-amber-400 transition-colors">Foundry</a>
+        <a href="companies.html" class="hover:text-amber-400 transition-colors">For Companies</a>
+        <a href="students.html" class="hover:text-amber-400 transition-colors">For Students</a>
+        <a href="contact.html" class="hover:text-amber-400 transition-colors">Contact</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-4">
+        <a href="index.html#waitlist" class="btn-primary text-sm py-2.5 px-5">Join Waitlist</a>
+      </div>
+
+      <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+
+    <div id="mobile-nav" class="hidden md:hidden bg-dark-950/95 border-b border-white/10 px-6 py-5 space-y-4">
+      <a href="about.html" class="block text-slate-300 hover:text-amber-400 py-1">About</a>
+      <a href="labs.html" class="block text-amber-400 font-semibold py-1">Labs</a>
+      <a href="foundry.html" class="block text-slate-300 hover:text-amber-400 py-1">Foundry</a>
+      <a href="companies.html" class="block text-slate-300 hover:text-amber-400 py-1">For Companies</a>
+      <a href="students.html" class="block text-slate-300 hover:text-amber-400 py-1">For Students</a>
+      <a href="contact.html" class="block text-slate-300 hover:text-amber-400 py-1">Contact</a>
+      <div class="pt-2">
+        <a href="index.html#waitlist" class="btn-primary w-full text-center py-2.5 text-sm">Join Waitlist</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-20 pb-12 bg-grid-pattern relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="terminal-tag tag-cyan mb-4">THE LABS CATALOG</div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+        Industry-Simulation <span class="text-gradient-cyan">Labs</span>
+      </h1>
+      <p class="mt-4 text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+        Practical, cohort-based environments where you learn by debugging messy codebases, diagnosing production incidents, and shipping verified deliverables.
+      </p>
+
+      <!-- Category Filter Buttons -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-2">
+        <button class="lab-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all bg-amber-500/20 text-amber-400 border border-amber-500/50" data-filter="all">
+          ALL TRACKS (12)
+        </button>
+        <button class="lab-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all bg-zinc-900 text-zinc-400 border border-zinc-800 hover:border-zinc-700" data-filter="tech">
+          TECH &amp; SOFTWARE
+        </button>
+        <button class="lab-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all bg-zinc-900 text-zinc-400 border border-zinc-800 hover:border-zinc-700" data-filter="engineering">
+          ENGINEERING &amp; CAD
+        </button>
+        <button class="lab-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all bg-zinc-900 text-zinc-400 border border-zinc-800 hover:border-zinc-700" data-filter="operations">
+          MANAGEMENT &amp; MEDICAL
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Labs Grid -->
+  <section class="py-12 pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- 1. Python Full Stack -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="tech">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-amber text-[10px]">TECH &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-01</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Python Full Stack</h3>
+            <p class="text-xs text-amber-400/90 font-mono mb-3">Django &bull; React &bull; Celery &bull; Redis &bull; PostgreSQL</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Learners can build a simple demo app, but panic when background workers drop jobs or auth tokens conflict under concurrent load.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Race conditions in checkout, slow SQL queries, leaky Celery tasks.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Hardened payment service + automated regression test suite.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">PR Reviews Included</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 2. Java Full Stack -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="tech">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-amber text-[10px]">TECH &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-02</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Java Full Stack</h3>
+            <p class="text-xs text-amber-400/90 font-mono mb-3">Spring Boot &bull; Microservices &bull; JPA/Hibernate &bull; Kafka</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Knows basic OOP syntax, but cannot resolve transaction boundary errors or database deadlocks in distributed services.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Unhandled exceptions, connection pool starvation, JPA N+1 bugs.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Refactored Spring Boot cluster + Kafka consumer event pipeline.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">PR Reviews Included</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 3. Data Science -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="tech">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-cyan text-[10px]">TECH &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-03</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Data Science</h3>
+            <p class="text-xs text-cyan-400/90 font-mono mb-3">Python &bull; Pandas &bull; Scikit-learn &bull; SQL &bull; Reproducibility</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Trains models on clean Kaggle datasets, but fails when production data suffers from covariate shift, skew, and leakage.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Data leakage in cross-validation, unhandled null features, drift.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Reproducible end-to-end audit notebook + deployment container.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">PR Reviews Included</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 4. Business Analytics -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="operations">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-rose text-[10px]">OPERATIONS &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-04</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Business Analytics</h3>
+            <p class="text-xs text-rose-400/90 font-mono mb-3">Advanced SQL &bull; Excel Modeling &bull; Tableau &bull; Variance Analysis</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Can build charts, but cannot untangle conflicting KPI definitions or identify why quarterly revenues don't reconcile.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Duplicate transaction records, broken formulas, misclassified revenue.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Reconciled executive variance model + verified SQL queries.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">Audit Proof</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 5. Embedded Systems -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="engineering">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-cyan text-[10px]">ENGINEERING &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-05</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Embedded Systems</h3>
+            <p class="text-xs text-cyan-400/90 font-mono mb-3">C for Embedded &bull; Microcontrollers &bull; FreeRTOS &bull; GDB &bull; SPI/I2C</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Can flash LED blink scripts, but struggles with hardware interrupts, memory corruption, and sensor clock timing faults.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Memory leaks in firmware heap, watchdog timer resets, corrupted buffers.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Stable sensor driver firmware + memory leak profiling log.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">Firmware Verified</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 6. IoT & Robotics -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="engineering">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-cyan text-[10px]">ENGINEERING &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-06</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">IoT &amp; Robotics</h3>
+            <p class="text-xs text-cyan-400/90 font-mono mb-3">C++ &bull; ROS &bull; Python &bull; MQTT &bull; Real-time Telemetry</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Can wire a circuit board, but cannot debug dropped sensor packets or race conditions in robot motion controllers.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Telemetry loss over unreliable networks, actuator jitter.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Production ROS package with fail-safe recovery logic.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">Verified Pipeline</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 7. CATIA -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="engineering">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-amber text-[10px]">CAD &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-07</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">CATIA Mechanical CAD</h3>
+            <p class="text-xs text-amber-400/90 font-mono mb-3">3D Modeling &bull; Assembly Constraints &bull; DFM Auditing &bull; Tolerancing</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Knows 3D sketching, but cannot fix broken geometric constraints or design-for-manufacturability (DFM) clashes.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Constraint failure in multi-body assembly, impossible draft angles.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Production-ready, validated 3D assembly with zero interference.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">DFM Certified</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 8. AutoCAD -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="engineering">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-amber text-[10px]">CAD &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-08</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">AutoCAD</h3>
+            <p class="text-xs text-amber-400/90 font-mono mb-3">2D/3D Drafting &bull; Site Schematics &bull; Layer Standards &bull; Plotting</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Can draw shapes, but cannot correct a drawing set so that a construction site can actually build from it without error.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Unmatched dimensioning scales, overlapping layers, missing callouts.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Flawless construction-ready drawing set and compliance sign-off.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">Site-Ready Proof</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 9. Construction Planning -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="operations">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-rose text-[10px]">OPERATIONS &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-09</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Construction Planning</h3>
+            <p class="text-xs text-rose-400/90 font-mono mb-3">Primavera P6 &bull; MS Project &bull; Critical Path &bull; Milestone Audits</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Knows Gantt charts, but cannot identify why a project schedule is collapsing under delayed milestone dependencies.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Critical path slips, contractor resource overallocations.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Rescheduled baseline plan with risk-mitigation contingencies.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">Audit Portfolio</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 10. Quality & Safety -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="operations">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-rose text-[10px]">OPERATIONS &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-10</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Quality &amp; Safety</h3>
+            <p class="text-xs text-rose-400/90 font-mono mb-3">ISO 9001/45001 &bull; OSHA Protocols &bull; Root Cause Analysis &bull; CAPA</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Knows safety terms, but cannot run an audit that uncovers genuine operational defects and compliance risks.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Defect audits, safety inspection failures, near-miss logging gaps.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Formal audit report + Corrective and Preventive Action Plan (CAPA).</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">CAPA Signed</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 11. Medical Coding -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="operations">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-rose text-[10px]">MEDICAL &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-11</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Medical Coding</h3>
+            <p class="text-xs text-rose-400/90 font-mono mb-3">ICD-10-CM &bull; CPT &bull; HCPCS Level II &bull; Chart Audits &bull; Billing</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Memorized manual codes, but cannot audit a patient medical chart that will pass a real insurance claim without denial.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Miscoded charts, unbundled services, claim rejection errors.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Audited, correctly coded patient charts ready for claim payout.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">Claim Proof</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+        <!-- 12. Bioinformatics -->
+        <div class="lab-card glass-card p-6 flex flex-col justify-between" data-category="tech">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="terminal-tag tag-cyan text-[10px]">TECH &bull; 9 WEEKS</span>
+              <span class="text-xs font-mono text-slate-500">LAB-12</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Bioinformatics</h3>
+            <p class="text-xs text-cyan-400/90 font-mono mb-3">Python &bull; Nextflow &bull; FASTA/FASTQ &bull; Variant Calling &bull; QC</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              <strong>Core Gap:</strong> Can run a bioinformatics script once, but cannot troubleshoot or trust a failing genomic data pipeline.
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-300 border-t border-white/5 pt-3">
+              <div><strong class="text-slate-400">Simulation:</strong> Pipeline crashes, contaminated samples, misleading parameters.</div>
+              <div><strong class="text-slate-400">Deliverable:</strong> Cleaned genomic analysis pipeline + peer-review methods report.</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-emerald-400">Peer Reviewed</span>
+            <a href="index.html#waitlist" class="btn-primary text-xs py-2 px-3">Join Waitlist</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark-950 border-t border-white/10 py-12 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>&copy; 2026 Bug Refinery. Beyond Theory. All rights reserved.</div>
+      <div>Support: <a href="mailto:support@bugrefinery.com" class="text-amber-400 hover:underline">support@bugrefinery.com</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

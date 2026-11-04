@@ -1,4 +1,8 @@
-# Bug Refinery Website Replica (Same-to-Same Clone)
+# Bug Refinery
+
+The current website uses React, TypeScript, Tailwind, Express and Supabase. See
+[development and testing](DEVELOPMENT.md) for the build and local server commands.
+The notes below describe the original static replica kept for reference.
 
 A pixel-perfect, complete reproduction of [bugrefinery.com](http://bugrefinery.com) — **Beyond Theory**.
 

@@ -1,0 +1,2 @@
+import fs from 'node:fs';
+const file='demo/verify.mjs';let s=fs.readFileSync(file,'utf8');s=s.replace("import { verifyUniverse } from './verify-universe.mjs';", "import { verifyLanding } from './verify-landing.mjs';").replace('await verifyUniverse(browser, baseURL, errors);','await verifyLanding(browser, baseURL, errors);').replace(".journey-actions a",'.hero-capsule').replace('.universe-surface canvas','canvas').replace('../test-results/industry-universe/','../test-results/glass-landing/');fs.writeFileSync(file,s);

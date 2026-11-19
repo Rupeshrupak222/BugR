@@ -6,9 +6,29 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build && vite build --target node24 --ssr src/render.tsx --outDir .render && node .render/render.js",
     "start": "node --env-file-if-exists=.env server/index.js",
+    "demo:build": "tsc --noEmit -p demo/tsconfig.json && vite build --config demo/vite.config.ts && vite build --config demo/vite.config.ts --target node24 --ssr src/render.tsx --outDir .render && node demo/.render/render.js",
+    "demo:start": "node demo/preview.mjs",
+    "demo:test": "node --test test/lead.test.js && node demo/verify.mjs",
     "test": "node --test",
     "test:browser": "playwright test"
   },
-  "dependencies": {"express":"^5.1.0","react":"^19.1.0","react-dom":"^19.1.0"},
-  "devDependencies": {"@playwright/test":"^1.51.0","@tailwindcss/vite":"^4.1.0","@types/node":"^22.0.0","@types/react":"^19.0.0","@types/react-dom":"^19.0.0","tailwindcss":"^4.1.0","typescript":"^5.8.0","vite":"^6.3.0"}
+  "dependencies": {
+    "express": "^5.1.0",
+    "framer-motion": "14.12.0",
+    "lucide-react": "1.72.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "0.187.0",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.8.0",
+    "vite": "^6.3.0"
+  }
 }

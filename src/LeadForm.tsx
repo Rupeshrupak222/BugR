@@ -4,7 +4,7 @@ import type { FormEvent } from 'react';
 const main = new Set(['Students', 'Companies', 'Contact']);
 const endpoint = '/api/lead';
 const support = 'support@bugrefinery.com';
-type Widget = { render: (element: HTMLElement, options: { sitekey: string; action: string }) => string; remove: (id: string) => void; reset: (id: string) => void };
+type Widget = { render: (element: HTMLElement, options: { sitekey: string; action: string; size: 'compact' | 'normal' }) => string; remove: (id: string) => void; reset: (id: string) => void };
 let script: Promise<Widget> | undefined;
 
 function loadWidget() {
@@ -22,7 +22,7 @@ function loadWidget() {
   return script;
 }
 
-export function LeadForm({ source }: { source: string }) {
+export function LeadForm({ source, submitLabel = 'Send enquiry', onBusyChange }: { source: string; submitLabel?: string; onBusyChange?: (busy: boolean) => void }) {
   const id = useId();
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -44,7 +44,10 @@ export function LeadForm({ source }: { source: string }) {
         if (main.has(source)) {
           const api = await loadWidget();
           if (!active || !target.current) return;
-          widget.current = { api, id: api.render(target.current, { sitekey: config.siteKey, action: source.toLowerCase() }) };
+          widget.current = { api, id: api.render(target.current, {
+            sitekey: config.siteKey, action: source.toLowerCase(),
+            size: matchMedia('(max-width: 500px)').matches ? 'compact' : 'normal'
+          }) };
         }
         if (active) setReady(true);
       })
@@ -61,7 +64,7 @@ export function LeadForm({ source }: { source: string }) {
     const form = event.currentTarget;
     const fields = new FormData(form);
     const get = (name: string) => String(fields.get(name) ?? '').trim();
-    const data = { name: get('name'), email: get('email'), phone: get('phone'), message: get('message'), source, website: get('website') };
+    const data = { name: get('name'), email: get('email'), phone: get('phone'), message: get('message'), source, website: String(fields.get('website') ?? '') };
     const invalid: Record<string, string> = {};
     if (!data.name) invalid.name = 'Enter your name.';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) invalid.email = 'Enter a valid email address.';
@@ -72,11 +75,16 @@ export function LeadForm({ source }: { source: string }) {
     const first = Object.keys(invalid)[0];
     if (first) { form.querySelector<HTMLInputElement>('[name="' + first + '"]')?.focus(); return; }
     const token = get('cf-turnstile-response');
+    if (main.has(source) && !token) {
+      setNotice('Please complete verification and retry.');
+      return;
+    }
     const fingerprint = JSON.stringify(data);
-    if (!attempt.current || attempt.current.fingerprint !== fingerprint) attempt.current = { key: crypto.randomUUID(), fingerprint };
     lock.current = true;
     setBusy(true);
+    onBusyChange?.(true);
     try {
+      if (!attempt.current || attempt.current.fingerprint !== fingerprint) attempt.current = { key: crypto.randomUUID(), fingerprint };
       const response = await fetch(endpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, token, requestId: attempt.current.key }),
@@ -93,25 +101,26 @@ export function LeadForm({ source }: { source: string }) {
     } catch {
       setNotice('We couldn’t confirm your submission. Please retry or contact support.');
     } finally {
-      if (widget.current) widget.current.api.reset(widget.current.id);
       lock.current = false;
       setBusy(false);
+      onBusyChange?.(false);
+      if (widget.current) widget.current.api.reset(widget.current.id);
     }
   }
 
-  return <form className="lead panel" onSubmit={submit} action={endpoint} method="post" noValidate>
+  return <form className="lead panel" data-source={source} onSubmit={submit} action={endpoint} method="post" noValidate>
     <fieldset disabled={!ready || busy}>
       <legend>Register interest · {source}</legend>
       {([['name','Name','text',120],['email','Email','email',254],['phone','Phone number','tel',32]] as const).map(([name, label, type, max]) =>
         <label key={name}>{label}<input name={name} type={type} required maxLength={max} autoComplete={name === 'phone' ? 'tel' : name} aria-invalid={!!errors[name]} aria-describedby={errors[name] ? id + name : undefined} />
           {errors[name] && <span id={id + name} className="error">{errors[name]}</span>}</label>)}
       {(source === 'Contact' || source === 'Companies') && <label>Message (optional)<textarea name="message" maxLength={2000} rows={4} /></label>}
-      <label className="trap" aria-hidden="true">Leave this empty<input name="website" tabIndex={-1} autoComplete="off" /></label>
-      <div ref={target} />
-      <button className="button primary" type="submit">{busy ? 'Sending…' : 'Send enquiry'}</button>
+      <label className="trap" hidden>Leave this empty<input name="website" tabIndex={-1} autoComplete="off" /></label>
+      <div className="verification" ref={target} />
+      <button className="button primary" type="submit">{busy ? 'Sending…' : submitLabel}</button>
     </fieldset>
-    <p className={verified ? 'success' : 'error'} role="status">{notice}</p>
-    {!ready && <p>Online submission is unavailable until the form connects. Contact <a href={'mailto:' + support}>{support}</a>.</p>}
+    <p className={verified ? 'form-status success' : 'form-status error'} data-state={verified ? 'saved' : 'notice'} role="status">{notice}</p>
+    {!ready && <p className="form-fallback">Online submission requires the lead service. Contact <a href={'mailto:' + support}>{support}</a>.</p>}
   </form>;
 }
 

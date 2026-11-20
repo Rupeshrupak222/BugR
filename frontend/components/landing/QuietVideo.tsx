@@ -161,7 +161,6 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
       className={'quiet-video' + (hero ? ' hero-film' : '')}
       data-playing={playing}
       data-live={live && !failed}
-      style={hero ? { marginTop: '-20px', height: 'calc(100% + 20px)' } : undefined}
     >
       <img
         src={'/assets/landing/' + name + '.webp'}
@@ -170,7 +169,6 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
         height="720"
         loading={hero ? 'eager' : 'lazy'}
         fetchPriority={hero ? 'high' : 'auto'}
-        style={hero ? { marginTop: '-20px', objectPosition: 'center 30%', transform: 'translateY(calc(-8% - 20px)) scale(1.22)', transformOrigin: 'center center' } : undefined}
       />
       {requested && !failed && (
         <video
@@ -183,17 +181,7 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
           preload={hero ? 'auto' : 'metadata'}
           aria-hidden="true"
           tabIndex={-1}
-          style={{
-            opacity: hero ? 1 : 0,
-            ...(hero
-              ? {
-                  marginTop: '-20px',
-                  objectPosition: 'center 30%',
-                  transform: 'translateY(calc(-8% - 20px)) scale(1.22)',
-                  transformOrigin: 'center center',
-                }
-              : {}),
-          }}
+          style={{ opacity: hero ? 1 : 0 }}
           onCanPlay={() => {
             setLive(true);
             play();

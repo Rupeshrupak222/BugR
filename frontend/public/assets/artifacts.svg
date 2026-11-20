@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="tech" viewBox="0 0 320 160">
+    <g fill="none" stroke="currentColor" stroke-width="1.1">
+      <path opacity=".38" d="M26 123h268M42 35h233M58 25v111m199-111v111M40 105l-17 17 9 12h78m129-100 30-17h21"/>
+      <path d="M54 34h150l20 18v75H54zm0 18h170M204 34v18M67 42h4m6 0h4m6 0h4"/>
+      <path opacity=".55" d="M69 65h35m-35 12h58m-58 12h44m-44 12h77m-77 12h33M150 67h40m-29 12h45m-45 12h28"/>
+      <path class="accent-stroke" d="M110 65h28m-14 24h24m-32 24h32M184 105h44l11-13h39"/>
+      <path d="M234 54h48v39h-48zM250 65l-6 8 6 8m16-16 6 8-6 8m-9 3 4-22"/>
+      <circle cx="236" cy="117" r="4"/><circle cx="278" cy="92" r="3"/>
+    </g>
+  </symbol>
+  <symbol id="management" viewBox="0 0 320 160">
+    <g fill="none" stroke="currentColor" stroke-width="1.1">
+      <path opacity=".4" d="M28 38h264M28 126h264M50 23v115m220-115v115m-115-103 21 14m-21 54 21-16"/>
+      <path d="M58 24h93l13 13v92H58zM151 24v13h13M70 43h47m-47 7h29M69 60h84v57H69zM69 74h84m-84 14h84m-84 14h84M104 60v57m25-57v57"/>
+      <path class="accent-stroke" d="M72 102h79v14H72m40-9h11m13 0h11"/>
+      <path d="M180 46h85v70h-85zM189 105h66m-62 0V88h8v17m7 0V76h8v29m7 0V82h8v23m7 0V64h8v41"/>
+      <path class="accent-stroke" d="m190 86 20-15 19 3 23-16m-7 0h7v7"/>
+      <circle cx="172" cy="93" r="3"/><circle cx="172" cy="44" r="3"/>
+    </g>
+  </symbol>
+  <symbol id="engineering" viewBox="0 0 320 160">
+    <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round">
+      <path opacity=".38" d="M31 80h263M159 19v127M62 27v104m188-104v104M44 119h238M44 43h238" stroke-dasharray="3 5"/>
+      <path d="m94 78 68-39 68 39-68 39zm0 0v17l68 40 68-40V78m-68 39v18"/>
+      <path d="m116 78 46-26 46 26-46 26zm13 0 33-19 33 19-33 19z"/>
+      <ellipse cx="162" cy="78" rx="16" ry="9"/>
+      <path d="M148 75v-18c0-5 6-8 14-8s14 3 14 8v18M148 58c0 5 6 8 14 8s14-3 14-8M103 81v10m13 0v10m88-12v12m13-20v12"/>
+      <path class="accent-stroke" d="M94 55V30m136 25V30M94 34h136m-130-3-6 3 6 3m124-6 6 3-6 3m18 46h25m-25 12h25m-4-12v12"/>
+      <path d="m65 113-12 9H37m204-60 15-12h26"/>
+      <circle cx="65" cy="113" r="3"/><circle cx="241" cy="62" r="3"/>
+    </g>
+  </symbol>
+  <symbol id="medical" viewBox="0 0 320 160">
+    <g fill="none" stroke="currentColor" stroke-width="1.1">
+      <path opacity=".4" d="M30 37h256M30 122h256M54 25v110m210-110v110"/>
+      <path d="M60 31h100v97H60zM83 29v-5h54v12H83zm-11 20h31m-31 8h66m-66 51h62m-62 8h48M70 67h81v31H70z"/>
+      <path class="accent-stroke" d="M76 83h14l5-8 6 15 7-21 7 14h29M71 116h23"/>
+      <path d="M197 31c64 0 64 98 0 98m52-98c-64 0-64 98 0 98M208 33h30m-42 13h54m-59 13h64m-62 13h59m-59 17h59m-61 13h64m-59 13h54m-42 12h30"/>
+      <path opacity=".5" d="M165 51h18m-18 60h18m79-33h22"/><circle cx="281" cy="78" r="3"/>
+    </g>
+  </symbol>
+  <symbol id="index" viewBox="0 0 320 160">
+    <g fill="none" stroke="currentColor" stroke-width="1.1">
+      <path opacity=".45" d="M36 80h248m-124-62v124M54 25h212v110H54z"/>
+      <path d="m160 34 76 46-76 46-76-46zM84 80l76-14 76 14-76 16zm76-46v92m-44-66 44 36 44-36m-88 40 44-34 44 34"/>
+      <path class="accent-stroke" d="M47 41V19h22m182 0h22v22m0 78v22h-22m-182 0H47v-22"/>
+      <circle cx="160" cy="80" r="23"/><circle cx="160" cy="80" r="5"/>
+    </g>
+  </symbol>
+  <symbol id="seal" viewBox="0 0 320 160">
+    <g fill="none" stroke="currentColor" stroke-width="1">
+      <path opacity=".4" d="M59 80h202M160 5v150M99 32h122v96H99z" stroke-dasharray="3 4"/>
+      <circle cx="160" cy="80" r="67"/><circle cx="160" cy="80" r="57"/><circle cx="160" cy="80" r="47" stroke-dasharray="1 3"/>
+      <path class="accent-stroke" stroke-width="2" d="M149 43h22m-18 0v25l-21 34q-3 9 6 9h44q9 0 6-9l-21-34V43M147 92l13-7 13 7v12h-26zm13-7v19"/>
+      <path d="M85 80h22m106 0h22m-75-73v21m0 104v21"/>
+    </g>
+  </symbol>
+</svg>

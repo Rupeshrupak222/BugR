@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .render/
+.next/
+coverage/
 .env
 .env.*
 !.env.example

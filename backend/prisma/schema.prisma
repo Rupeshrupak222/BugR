@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Lead {
+  id          String   @id @default(uuid()) @db.Uuid
+  requestId   String   @unique @map("request_id")
+  name        String   @db.VarChar(120)
+  email       String   @db.VarChar(254)
+  phone       String   @db.VarChar(32)
+  source      String   @db.VarChar(80)
+  message     String   @default("") @db.VarChar(2000)
+  status      String   @default("NEW") @db.VarChar(20)
+  submittedAt DateTime @default(now()) @map("submitted_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@index([source])
+  @@map("leads")
+}
+
+model LeadRateAttempt {
+  id          String   @id @default(uuid()) @db.Uuid
+  ipHash      String   @map("ip_hash") @db.VarChar(64)
+  attemptedAt DateTime @default(now()) @map("attempted_at")
+
+  @@index([ipHash, attemptedAt])
+  @@index([attemptedAt])
+  @@map("lead_rate_attempts")
+}
+
+model User {
+  id           String     @id @default(uuid()) @db.Uuid
+  email        String     @unique @db.VarChar(254)
+  passwordHash String     @map("password_hash")
+  name         String     @db.VarChar(120)
+  role         String     @default("USER") @db.VarChar(20)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+  documents    Document[]
+
+  @@map("users")
+}
+
+model Document {
+  id          String   @id @default(uuid()) @db.Uuid
+  filename    String   @db.VarChar(255)
+  storagePath String   @map("storage_path") @db.VarChar(512)
+  fileSize    Int      @map("file_size")
+  mimeType    String   @map("mime_type") @db.VarChar(100)
+  uploadedBy  String?  @map("uploaded_by") @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at")
+  user        User?    @relation(fields: [uploadedBy], references: [id], onDelete: SetNull)
+
+  @@index([uploadedBy])
+  @@map("documents")
+}

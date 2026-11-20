@@ -1,46 +1,156 @@
-# Bug Refinery
+# Bug Refinery — Enterprise Monorepo
 
-The current website uses React, TypeScript, Tailwind, Express and Supabase. See
-[development and testing](DEVELOPMENT.md) for the build and local server commands.
-The notes below describe the original static replica kept for reference.
-
-A pixel-perfect, complete reproduction of [bugrefinery.com](http://bugrefinery.com) — **Beyond Theory**.
+> **Beyond Theory • Industry-Simulation Platform**  
+> Bridge the gap between your degree and your first real job with 26 industry-simulation labs.
 
 ---
 
-## 🚀 Features & Structure Included
+## 🏗️ Technology Stack
 
-- **`index.html`** — Complete Main Landing Page:
-  - Top Badge: `BEYOND THEORY • INDUSTRY-SIMULATION PLATFORM`
-  - Hero Header: *"Bridge the Gap Between Your Degree and Your First Real Job"*
-  - Subhead: *"You spent four years learning computer science. Bug Refinery spends the next few months turning that theory into the practical skills companies actually hire for."*
-  - **Live Interactive Terminal Simulation**: Recreates real production debugging cycles (race conditions, distributed locks, passing tests, PR reviews).
-  - **The Gap No One Talks About**: Side-by-side comparison of *The Hiring Manager's Frustration* vs. *The Graduate's Reality*.
-  - **The Refinery Model ("Three Steps to Job-Ready")**: `$ step-01 simulate`, `$ step-02 debug`, `$ step-03 ship`.
-  - **The 9-Week Curriculum Breakdown**: Weeks 1–2 (Skills Brushup), Weeks 3–4 (Production Debugging), Weeks 5–7 (Codebase Navigation), Weeks 8–9 (Shipping Features).
-  - **Two Wings. One Company**: Labs (Training Wing) & Foundry (Development Wing).
-  - **Interactive Labs Grid**: Fast access to all 12 discipline tracks.
-  - **What Students Walk Away With**: Verified Portfolio, Direct Intros, Practical Prep, Lifetime Community.
-  - **Early Access Waitlist Form**: Clean validation and feedback.
-  - **Cookie Consent Banner**: Storing user choices locally in `localStorage`.
-
-- **`about.html`** — Deep dive into the educational gap, the simulation pedagogy, and engineering principles.
-- **`labs.html`** — Full directory of all 12 Industry-Simulation Labs with filter buttons (Tech, CAD, Management, Medical).
-- **`foundry.html`** — Bug Refinery Foundry (*"Ideas in. Products out."*).
-- **`companies.html`** — Bug Refinery for Companies (*"Stop Onboarding Graduates Who Can't Ship"*).
-- **`students.html`** — Dedicated For Students & Graduates portal.
-- **`contact.html`** — Direct inquiry portal with `support@bugrefinery.com`.
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | **Next.js (App Router)** + **React 19** + **TypeScript** |
+| **Styling** | **Tailwind CSS** + **shadcn/ui** |
+| **Animations** | **Motion (Framer Motion)** + **GSAP** |
+| **Backend** | **NestJS** + **Node.js 24** + **TypeScript** |
+| **API** | **REST API** + **Swagger OpenAPI** (`/api/docs`) |
+| **Database** | **Supabase PostgreSQL** |
+| **ORM** | **Prisma** |
+| **Validation** | **Zod** (frontend), **class-validator** (backend) |
+| **Authentication** | **JWT** / **Supabase Auth** |
+| **File Storage** | **Supabase Storage** |
+| **Testing** | **Vitest** (frontend unit), **Jest** (backend unit/e2e), **Playwright** (browser e2e) |
+| **CI/CD** | **GitHub Actions** (`.github/workflows/ci.yml`) |
+| **Frontend Deployment** | **Vercel** (`vercel.json`) |
+| **Backend Deployment** | **Render** (`render.yaml`, `backend/Dockerfile`) |
+| **Package Manager** | **pnpm** (Monorepo workspaces) |
 
 ---
 
-## 🛠️ How to View Locally
+## 📁 Repository Structure
 
-Simply double-click `index.html` in your file explorer, or start a lightweight local server:
+```
+BugR/
+├── frontend/                     # Next.js (App Router) + React + TypeScript
+│   ├── app/
+│   │   ├── layout.tsx            # Root layout with theme, fonts, Navbar & Footer
+│   │   ├── page.tsx              # Liquid Glass Landing with Motion + GSAP
+│   │   ├── labs/                 # Labs directory & dynamic [slug] lab routes
+│   │   ├── about/                # About Bug Refinery & pedagogy
+│   │   ├── companies/            # For Hiring Teams & Corporate Partners
+│   │   ├── students/             # For CS Students & Graduates
+│   │   ├── contact/              # Support & Inquiry
+│   │   ├── signup/               # Cohort 30 Application
+│   │   └── globals.css           # Tailwind + shadcn liquid glass styling
+│   ├── components/
+│   │   ├── ui/                   # Accessible shadcn/ui components
+│   │   ├── landing/              # Hero, Terminal Sim, GapComparison, LabsCatalog
+│   │   ├── animations/           # GSAP staggered reveal & Motion wrappers
+│   │   ├── LeadForm.tsx          # Zod-validated enquiry form
+│   │   ├── Navbar.tsx            # Liquid glass responsive navigation
+│   │   └── Footer.tsx            # Footer navigation & discipline links
+│   ├── data/                     # 26 industry-simulation labs data
+│   ├── lib/                      # Zod schemas, cn utility, typed API client
+│   ├── tests/                    # Vitest unit tests & Playwright e2e specs
+│   ├── next.config.ts            # Next.js configuration & API rewrites
+│   ├── tailwind.config.ts        # Tailwind configuration & design tokens
+│   └── vitest.config.ts          # Vitest testing configuration
+│
+├── backend/                      # NestJS + Node.js + TypeScript
+│   ├── src/
+│   │   ├── main.ts               # Nest bootstrap, validation pipe & Swagger docs
+│   │   ├── app.module.ts         # Root module configuration
+│   │   ├── prisma/               # PrismaService connection handling
+│   │   ├── leads/                # Lead capture, IP rate limiting & Turnstile
+│   │   │   ├── dto/              # class-validator DTOs with Swagger annotations
+│   │   │   ├── leads.controller.ts
+│   │   │   └── leads.service.ts
+│   │   ├── auth/                 # JWT authentication & Supabase Auth integration
+│   │   ├── storage/              # Supabase Object Storage service
+│   │   └── health/               # Health check endpoint (/api/health)
+│   ├── prisma/
+│   │   └── schema.prisma         # PostgreSQL schema (Leads, RateAttempts, Users, Docs)
+│   ├── test/                     # Jest e2e test suite
+│   ├── Dockerfile                # Production Docker container for Render
+│   └── jest.config.js            # Jest testing configuration
+│
+├── .github/workflows/ci.yml      # GitHub Actions CI workflow
+├── pnpm-workspace.yaml           # pnpm monorepo workspace definition
+├── package.json                  # Root monorepo orchestration scripts
+├── vercel.json                   # Vercel configuration for frontend
+└── render.yaml                   # Render Blueprint configuration for backend
+```
+
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Prerequisites
+- **Node.js**: v24.x or later
+- **pnpm**: v12.x or later (`npm install -g pnpm`)
+
+### 2. Install Dependencies
+```bash
+pnpm install
+```
+
+### 3. Generate Prisma Client
+```bash
+pnpm prisma:generate
+```
+
+### 4. Run Development Servers
+To run both frontend and backend concurrently:
+```bash
+pnpm dev
+```
+Or run each individually:
+```bash
+# Frontend (Next.js) on http://localhost:3000
+pnpm dev:frontend
+
+# Backend (NestJS) on http://localhost:4000 (Swagger at /api/docs)
+pnpm dev:backend
+```
+
+---
+
+## 🧪 Testing
 
 ```bash
-# Python local server:
-python -m http.server 3000
+# Run all unit tests (Jest for Backend + Vitest for Frontend)
+pnpm test
 
-# Open in browser:
-http://localhost:3000
+# Run frontend Vitest tests only
+pnpm test:frontend
+
+# Run backend Jest tests only
+pnpm test:backend
+
+# Run browser end-to-end tests (Playwright)
+pnpm test:e2e
 ```
+
+---
+
+## 📦 Production Build
+
+```bash
+# Build both frontend and backend
+pnpm build
+
+# Start production backend (Port 4000)
+pnpm start:backend
+
+# Start production frontend (Port 3000)
+pnpm start
+```
+
+---
+
+## 🌐 Endpoints
+
+- **Frontend App:** [http://localhost:3000](http://localhost:3000)
+- **Backend API:** [http://localhost:4000/api](http://localhost:4000/api)
+- **Swagger Documentation:** [http://localhost:4000/api/docs](http://localhost:4000/api/docs)
+- **Health Check:** [http://localhost:4000/api/health](http://localhost:4000/api/health)

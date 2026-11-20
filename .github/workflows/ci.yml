@@ -1,16 +1,47 @@
-name: Verify website
-on: [push, pull_request]
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, master, naveen]
+  pull_request:
+    branches: [main, master]
+
 jobs:
-  test:
+  test-and-build:
+    name: Lint, Test & Build (Next.js + NestJS + Prisma)
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:browser
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.21.0
+          run_install: false
+
+      - name: Install Monorepo Dependencies
+        run: pnpm install
+
+      - name: Generate Prisma Client (Backend)
+        run: pnpm prisma:generate
+
+      - name: Run Backend Unit & E2E Tests (Jest)
+        run: pnpm test:backend
+
+      - name: Run Frontend Tests (Vitest)
+        run: pnpm test:frontend
+
+      - name: Build Backend (NestJS)
+        run: pnpm build:backend
+
+      - name: Build Frontend (Next.js)
+        run: pnpm build:frontend
+        env:
+          NEXT_PUBLIC_API_URL: https://bug-refinery-api.onrender.com

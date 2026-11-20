@@ -77,6 +77,7 @@ export function LandingPage() {
       <section className="landing-hero">
         <QuietVideo name="hero" label="hero background" hero />
         <div className="hero-tint" />
+        <div className="hero-bottom-effect" aria-hidden="true" />
         <Navigation onRegister={setSource} />
         <div className="landing-hero-copy">
           <p className="hero-kicker">

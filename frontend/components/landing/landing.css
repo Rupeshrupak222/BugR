@@ -34,7 +34,7 @@
 .glass-landing button, .glass-landing a { -webkit-tap-highlight-color: transparent; }
 .landing-wrap { width: min(1152px, calc(100% - 64px)); margin-inline: auto; }
 .landing-label { color: #9b9b9b !important; font: 400 10px/1.6 var(--mono, "JetBrains Mono", monospace); letter-spacing: .17em; margin-bottom: 25px; }
-.landing-hero { position: relative; min-height: 780px; height: 100svh; max-height: 1100px; overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
+.landing-hero { position: relative; min-height: 600px; height: 100svh; max-height: 1100px; overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
 .hero-tint { pointer-events: none; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, #0005 0%, #0002 40%, transparent 60%, #0002 90%, #000 100%); }
 .quiet-video { position: relative; width: 100%; height: 100%; overflow: hidden; background: #050302; isolation: isolate; }
 .quiet-video img, .quiet-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -43,15 +43,12 @@
 .quiet-video[data-live='true'] img { visibility: hidden; }
 .quiet-video.hero-film {
   position: absolute;
-  top: 20px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: calc(100% - 20px);
+  inset: 0;
 }
 .hero-film img, .hero-film video {
   object-position: center bottom;
-  transform: none;
+  transform: translateY(-60px) scale(1.12);
+  transform-origin: center center;
 }
 .film-control { position: absolute; z-index: 4; top: 18px; right: 18px; min-height: 40px; border-radius: 99px; padding: 9px 15px; display: flex; align-items: center; gap: 8px; color: #fff; font-size: 10px; cursor: pointer; background-color: #0005; }
 .hero-film .film-control { top: auto; bottom: 40px; right: 32px; }
@@ -185,8 +182,8 @@
   .landing-header.enhanced nav.open { display: flex; }
   .landing-header.enhanced .landing-menu { display: block; }
   .landing-nav .nav-signup { min-height: 38px; padding: 8px 14px; font-size: 10px; gap: 7px; }
-  .landing-hero { height: 92svh; min-height: 720px; max-height: 1000px; }
-  .landing-hero-copy { padding: 55px 20px 85px; }
+  .landing-hero { height: 92svh; min-height: 560px; max-height: 1000px; }
+  .landing-hero-copy { padding: 35px 20px 65px; }
   .landing-hero h1 { font-size: clamp(57px, 13.7vw, 94px); }
   .hero-kicker { font-size: 8px; letter-spacing: .08em; }
   .hero-kicker span { margin-inline: 6px; }
@@ -197,15 +194,12 @@
   .hero-film .film-control { right: 14px; bottom: 102px; min-height: 35px; padding: 7px 11px; font-size: 8px; }
   .quiet-video.hero-film {
     position: absolute;
-    top: 20px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: calc(100% - 20px);
+    inset: 0;
   }
   .hero-film img, .hero-film video {
     object-position: 50% bottom;
-    transform: none;
+    transform: translateY(-35px) scale(1.10);
+    transform-origin: center center;
   }
   .landing-about { padding-top: 100px; padding-bottom: 32px; }
   .about-intro { font-size: 12px; }

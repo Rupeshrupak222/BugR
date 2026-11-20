@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
+import { AppShell } from '@/components/AppShell';
 
 export const metadata: Metadata = {
   title: 'Beyond Theory | Bug Refinery',
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Bug Refinery' }],
   icons: {
-    icon: '/brand.svg',
+    icon: '/assets/brand.svg',
   },
 };
 
@@ -28,11 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen bg-[#080808] text-white antialiased selection:bg-orange-500 selection:text-white">
-        <Navbar />
-        <main className="relative z-10 flex min-h-screen flex-col">
-          {children}
-        </main>
-        <Footer />
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

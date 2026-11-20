@@ -1,30 +1,38 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Bug Refinery Protected Landing Experience (Zero Regression)', () => {
-  test('landing page hero headline and terminal must remain exactly preserved', async ({ page }) => {
+  test('landing page hero headline, kicker, and authentic copy must remain exactly preserved', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveTitle(/Beyond Theory \| Bug Refinery/i);
 
+    // Hero kicker check
+    await expect(page.locator('.hero-kicker')).toContainText('26 LABS');
+    await expect(page.locator('.hero-kicker')).toContainText('4 INDUSTRIES');
+    await expect(page.locator('.hero-kicker')).toContainText('9 WEEKS');
+
     // Hero headline check
     const heading = page.locator('h1');
-    await expect(heading).toContainText('Bridge the Gap Between Your Degree');
-    await expect(heading).toContainText('First Real Job');
+    await expect(heading).toContainText('Beyond');
+    await expect(heading).toContainText('theory.');
 
-    // Terminal simulation window check
-    await expect(page.locator('text=sim-session: production-node-01')).toBeVisible();
-    await expect(page.locator('text=The Gap No One Talks About')).toBeVisible();
-    await expect(page.locator('text=The Hiring Manager’s Frustration')).toBeVisible();
-    await expect(page.locator('text=The Graduate’s Reality')).toBeVisible();
+    // Tagline and Capsule
+    await expect(page.locator('.hero-tagline')).toContainText('FROM THEORY TO PRODUCTION-READY.');
+    await expect(page.locator('.hero-capsule')).toContainText('Find your industry. Build your proof.');
 
-    // 26 Labs catalog check
-    await expect(page.locator('text=26 Industry-Simulation Labs')).toBeVisible();
+    // Sections check
+    await expect(page.locator('text=Four industries.').first()).toBeVisible();
+    await expect(page.locator('text=One way forward.').first()).toBeVisible();
+    await expect(page.locator('text=Work you can show.').first()).toBeVisible();
+    await expect(page.locator('#registration-heading')).toContainText('Take the');
+    await expect(page.locator('#registration-heading')).toContainText('next step.');
   });
 
-  test('landing page responsive navigation and links should function', async ({ page }) => {
+  test('landing page native navigation and links should function', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('a:has-text("Services")').first()).toBeVisible();
-    await expect(page.locator('a:has-text("Work")').first()).toBeVisible();
-    await expect(page.locator('a:has-text("Labs")').first()).toBeVisible();
+    await expect(page.locator('#landing-navigation a:has-text("The labs")')).toBeVisible();
+    await expect(page.locator('#landing-navigation a:has-text("The method")')).toBeVisible();
+    await expect(page.locator('#landing-navigation a:has-text("About")')).toBeVisible();
+    await expect(page.locator('.nav-signup')).toBeVisible();
   });
 });
 
@@ -33,9 +41,9 @@ test.describe('New IT Services & Solutions Routes', () => {
     await page.goto('/services');
     await expect(page).toHaveTitle(/IT Services & Digital Solutions \| Bug Refinery/i);
     await expect(page.locator('text=Full-Lifecycle Software Services')).toBeVisible();
-    await expect(page.locator('text=Custom Software Development')).toBeVisible();
-    await expect(page.locator('text=Cloud & DevOps Engineering')).toBeVisible();
-    await expect(page.locator('text=AI & Workflow Automation')).toBeVisible();
+    await expect(page.locator('h3:has-text("Custom Software Development")').first()).toBeVisible();
+    await expect(page.locator('h3:has-text("Cloud & DevOps Engineering")').first()).toBeVisible();
+    await expect(page.locator('h3:has-text("AI & Workflow Automation")').first()).toBeVisible();
   });
 
   test('should load individual service detail page', async ({ page }) => {
@@ -55,9 +63,9 @@ test.describe('New IT Services & Solutions Routes', () => {
   test('should load 7-step engineering process page', async ({ page }) => {
     await page.goto('/process');
     await expect(page.locator('h1:has-text("How We Deliver")')).toBeVisible();
-    await expect(page.locator('text=Discover')).toBeVisible();
-    await expect(page.locator('text=Deploy')).toBeVisible();
-    await expect(page.locator('text=Support')).toBeVisible();
+    await expect(page.locator('h2:has-text("Discover")').first()).toBeVisible();
+    await expect(page.locator('h2:has-text("Deploy")').first()).toBeVisible();
+    await expect(page.locator('h2:has-text("Support")').first()).toBeVisible();
   });
 
   test('should load enterprise project RFP inquiry portal', async ({ page }) => {

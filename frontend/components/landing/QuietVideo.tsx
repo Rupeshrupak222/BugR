@@ -10,17 +10,17 @@ type Connection = {
   removeEventListener?: (name: string, handler: () => void) => void;
 };
 
-// Only the hero may autoplay. All other videos have no src until the visitor asks.
+// Hero autoplay video background with seamless loop and responsive support
 export function QuietVideo({ name, label, hero = false }: { name: string; label: string; hero?: boolean }) {
   const host = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
-  const [requested, setRequested] = useState(false);
-  const [playing, setPlaying] = useState(false);
+  const [requested, setRequested] = useState(hero);
+  const [playing, setPlaying] = useState(hero);
   const [live, setLive] = useState(false);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
-  const wanted = useRef(false);
-  const visible = useRef(false);
+  const wanted = useRef(hero);
+  const visible = useRef(true);
   const tween = useRef(0);
   const restart = useRef<ReturnType<typeof setTimeout> | null>(null);
   const fading = useRef(false);
@@ -32,11 +32,11 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
     restart.current = null;
   }
 
-  function fade(to: number, duration = 500) {
+  function fade(to: number, duration = 400) {
     cancelAnimationFrame(tween.current);
     const element = video.current;
     if (!element) return;
-    if (reduced.current) {
+    if (reduced.current || hero) {
       element.style.opacity = String(to);
       return;
     }
@@ -61,8 +61,10 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
         fade(1);
       })
       .catch(() => {
-        wanted.current = false;
-        setPlaying(false);
+        if (!hero) {
+          wanted.current = false;
+          setPlaying(false);
+        }
       });
   }
 
@@ -79,19 +81,23 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
     const connection = (navigator as Navigator & { connection?: Connection }).connection;
     const decide = () => {
       reduced.current = preference.matches;
-      if (preference.matches || connection?.saveData || /(^|-)2g|3g/.test(connection?.effectiveType || '')) {
-        wanted.current = false;
-        video.current?.pause();
-        stopFade();
-        setPlaying(false);
-        setRequested(false);
-        setLive(false);
-      } else if (hero && matchMedia('(min-width: 768px)').matches) {
+      if (preference.matches || connection?.saveData) {
+        if (!hero) {
+          wanted.current = false;
+          video.current?.pause();
+          stopFade();
+          setPlaying(false);
+          setRequested(false);
+          setLive(false);
+        }
+      } else if (hero) {
         wanted.current = true;
         setRequested(true);
+        play();
       }
     };
     decide();
+
     const observer = new IntersectionObserver(
       (entries) => {
         visible.current = entries[0].isIntersecting;
@@ -99,21 +105,35 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
           video.current?.pause();
           stopFade();
           setPlaying(false);
-        } else play();
+        } else {
+          if (wanted.current) play();
+        }
       },
-      { threshold: 0.12 }
+      { threshold: 0.05 }
     );
     if (host.current) observer.observe(host.current);
+
     const visibility = () => {
       if (document.hidden) {
         video.current?.pause();
         stopFade();
         setPlaying(false);
-      } else play();
+      } else {
+        if (wanted.current) play();
+      }
     };
+
     preference.addEventListener('change', decide);
     connection?.addEventListener?.('change', decide);
     document.addEventListener('visibilitychange', visibility);
+
+    // Initial play attempt on mount
+    if (hero) {
+      wanted.current = true;
+      setRequested(true);
+      play();
+    }
+
     return () => {
       observer.disconnect();
       preference.removeEventListener('change', decide);
@@ -131,12 +151,17 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
       wanted.current = true;
       setFailed(false);
       setRequested(true);
-      if (video.current?.readyState && video.current.readyState >= 2) play();
+      play();
     }
   }
 
   return (
-    <div ref={host} className={'quiet-video' + (hero ? ' hero-film' : '')} data-playing={playing} data-live={live && !failed}>
+    <div
+      ref={host}
+      className={'quiet-video' + (hero ? ' hero-film' : '')}
+      data-playing={playing}
+      data-live={live && !failed}
+    >
       <img
         src={'/assets/landing/' + name + '.webp'}
         alt=""
@@ -149,14 +174,23 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
         <video
           ref={video}
           src={'/assets/landing/' + name + '.mp4'}
+          autoPlay={hero}
+          loop
           muted
           playsInline
           preload={hero ? 'auto' : 'metadata'}
           aria-hidden="true"
           tabIndex={-1}
-          style={{ opacity: 0 }}
-          onCanPlay={play}
-          onPlaying={() => setPlaying(true)}
+          style={{ opacity: hero ? 1 : 0 }}
+          onCanPlay={() => {
+            setLive(true);
+            play();
+          }}
+          onPlaying={() => {
+            setPlaying(true);
+            setLive(true);
+            if (hero && video.current) video.current.style.opacity = '1';
+          }}
           onPause={() => setPlaying(false)}
           onError={() => {
             setFailed(true);
@@ -164,27 +198,6 @@ export function QuietVideo({ name, label, hero = false }: { name: string; label:
             setPlaying(false);
             wanted.current = false;
             stopFade();
-          }}
-          onTimeUpdate={() => {
-            const element = video.current;
-            if (hero && element && element.duration - element.currentTime <= 0.55 && !fading.current && !element.paused) {
-              fading.current = true;
-              fade(0);
-            }
-          }}
-          onEnded={() => {
-            if (!hero) {
-              wanted.current = false;
-              setPlaying(false);
-              return;
-            }
-            if (video.current) video.current.style.opacity = '0';
-            restart.current = setTimeout(() => {
-              if (!video.current || !wanted.current) return;
-              video.current.currentTime = 0;
-              fading.current = false;
-              play();
-            }, 100);
           }}
         />
       )}

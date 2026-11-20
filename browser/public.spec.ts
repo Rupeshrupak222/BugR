@@ -49,7 +49,7 @@ test('public content and navigation survive without JS', async ({ browser }) => 
     await page.goto('/');
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await page.getByRole('navigation', { name: 'Main navigation' }).getByText('Sign Up').click();
-    await expect(page.getByText(/Online submission is unavailable until the form connects/)).toBeVisible();
+    await expect(page.getByText(/Online submission requires the lead service/)).toBeVisible();
     await expect(page.getByRole('button', { name: 'Send enquiry' })).toBeDisabled();
   } finally { await context.close(); }
 });

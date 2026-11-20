@@ -292,8 +292,14 @@
   background-color: #ffffff0d;
 }
 
-.landing-nav .nav-signup {
+.landing-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-left: auto;
+}
+
+.landing-nav .nav-signup {
   color: #ff9a4f;
 }
 
@@ -1522,4 +1528,306 @@
   .landing-contact {
     margin-top: 35px;
   }
+}
+
+
+/* ========================================================
+   LIGHT THEME ADAPTATIONS FOR LANDING PAGE
+   ======================================================== */
+
+html:not(.dark) .glass-landing,
+html.light .glass-landing {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+html:not(.dark) .glass-landing .liquid-glass,
+html:not(.dark) .liquid-glass,
+html.light .glass-landing .liquid-glass,
+html.light .liquid-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+html:not(.dark) .glass-landing .liquid-glass::before,
+html:not(.dark) .liquid-glass::before,
+html.light .glass-landing .liquid-glass::before,
+html.light .liquid-glass::before {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(0, 0, 0, 0.03) 40%, rgba(0, 0, 0, 0.05) 100%);
+}
+
+html:not(.dark) .glass-landing h1,
+html:not(.dark) .glass-landing h2,
+html:not(.dark) .glass-landing h3,
+html.light .glass-landing h1,
+html.light .glass-landing h2,
+html.light .glass-landing h3 {
+  color: #0f172a;
+}
+
+html:not(.dark) .glass-landing p,
+html.light .glass-landing p {
+  color: #475569;
+}
+
+html:not(.dark) .glass-landing em,
+html.light .glass-landing em {
+  color: #ea580c;
+}
+
+html:not(.dark) .landing-label,
+html.light .landing-label {
+  color: #64748b !important;
+}
+
+/* Hero Section in Light Mode */
+html:not(.dark) .hero-tint,
+html.light .hero-tint {
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.45) 0%, rgba(248, 250, 252, 0.15) 40%, transparent 60%, rgba(248, 250, 252, 0.6) 90%, #f8fafc 100%);
+}
+
+html:not(.dark) .hero-bottom-effect,
+html.light .hero-bottom-effect {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(234, 88, 12, 0.18) 0%, rgba(234, 88, 12, 0.04) 50%, transparent 80%),
+    linear-gradient(to top, #f8fafc 0%, rgba(248, 250, 252, 0.92) 35%, rgba(248, 250, 252, 0.4) 70%, transparent 100%);
+}
+
+html:not(.dark) .hero-bottom-effect::after,
+html.light .hero-bottom-effect::after {
+  background: radial-gradient(ellipse at center, rgba(234, 88, 12, 0.7) 0%, rgba(0, 0, 0, 0.12) 40%, transparent 85%);
+  box-shadow: 0 0 18px 2px rgba(234, 88, 12, 0.3);
+}
+
+html:not(.dark) .hero-kicker,
+html.light .hero-kicker {
+  color: #64748b !important;
+}
+
+html:not(.dark) .hero-tagline,
+html.light .hero-tagline {
+  color: #ea580c !important;
+  font-weight: 600;
+}
+
+html:not(.dark) .hero-subtitle,
+html.light .hero-subtitle {
+  color: #334155 !important;
+}
+
+html:not(.dark) .landing-brand,
+html.light .landing-brand {
+  color: #0f172a;
+}
+
+html:not(.dark) .landing-nav nav a,
+html.light .landing-nav nav a {
+  color: #475569;
+}
+
+html:not(.dark) .landing-nav nav a:hover,
+html.light .landing-nav nav a:hover {
+  color: #ea580c;
+}
+
+html:not(.dark) .landing-pill,
+html.light .landing-pill {
+  color: #0f172a;
+}
+
+html:not(.dark) .landing-pill:hover,
+html.light .landing-pill:hover {
+  color: #ea580c;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+html:not(.dark) .landing-nav .nav-signup,
+html.light .landing-nav .nav-signup {
+  color: #ea580c;
+  background: rgba(234, 88, 12, 0.08);
+  border-color: rgba(234, 88, 12, 0.3);
+}
+
+html:not(.dark) .hero-capsule,
+html.light .hero-capsule {
+  color: #334155;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+html:not(.dark) .hero-capsule:hover,
+html.light .hero-capsule:hover {
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+html:not(.dark) .capsule-arrow,
+html.light .capsule-arrow {
+  background: #ea580c;
+  color: #ffffff;
+}
+
+html:not(.dark) .landing-menu,
+html.light .landing-menu {
+  color: #0f172a;
+}
+
+/* Sections in Light Mode */
+html:not(.dark) .landing-about,
+html.light .landing-about {
+  background: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.03), transparent 70%);
+}
+
+html:not(.dark) .landing-about em,
+html.light .landing-about em {
+  color: #64748b;
+}
+
+html:not(.dark) .approach-note,
+html.light .approach-note {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .approach-note .landing-label,
+html.light .approach-note .landing-label {
+  color: #ea580c !important;
+}
+
+html:not(.dark) .approach-note>p:last-child,
+html.light .approach-note>p:last-child {
+  color: #0f172a;
+}
+
+html:not(.dark) .landing-method h2 em,
+html.light .landing-method h2 em {
+  color: #64748b;
+}
+
+html:not(.dark) .method-copy>div+div,
+html.light .method-copy>div+div {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .landing-industries,
+html.light .landing-industries {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .industry-entry,
+html.light .industry-entry {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .industry-entry summary h3,
+html.light .industry-entry summary h3 {
+  color: #0f172a;
+}
+
+html:not(.dark) .industry-number,
+html.light .industry-number {
+  color: #ea580c;
+}
+
+html:not(.dark) .industry-count,
+html.light .industry-count {
+  color: #64748b;
+}
+
+html:not(.dark) .industry-content>p,
+html.light .industry-content>p {
+  color: #475569;
+}
+
+html:not(.dark) .reading-labs a,
+html.light .reading-labs a {
+  color: #334155;
+}
+
+html:not(.dark) .reading-labs a:hover,
+html.light .reading-labs a:hover {
+  color: #ea580c;
+}
+
+html:not(.dark) .industry-content .industry-example,
+html.light .industry-content .industry-example {
+  color: #64748b;
+}
+
+html:not(.dark) .industry-example strong,
+html.light .industry-example strong {
+  color: #0f172a;
+}
+
+/* Philosophy Section in Light Mode */
+html:not(.dark) .landing-philosophy,
+html.light .landing-philosophy {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .philosophy-point,
+html.light .philosophy-point {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .philosophy-point h3,
+html.light .philosophy-point h3 {
+  color: #0f172a;
+}
+
+/* Registration Section in Light Mode */
+html:not(.dark) .registration-form,
+html.light .registration-form {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+html:not(.dark) .registration-form input,
+html:not(.dark) .registration-form select,
+html.light .registration-form input,
+html.light .registration-form select {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+}
+
+html:not(.dark) .registration-form input::placeholder,
+html.light .registration-form input::placeholder {
+  color: #94a3b8;
+}
+
+html:not(.dark) .registration-form label,
+html.light .registration-form label {
+  color: #334155;
+}
+
+html:not(.dark) .registration-form .lead legend,
+html.light .registration-form .lead legend {
+  color: #ea580c;
+}
+
+html:not(.dark) .registration-selection,
+html.light .registration-selection {
+  color: #64748b;
+}
+
+html:not(.dark) .landing-contact,
+html.light .landing-contact {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .film-control,
+html.light .film-control {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #0f172a;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+html:not(.dark) .film-control:hover,
+html.light .film-control:hover {
+  background-color: rgba(255, 255, 255, 0.98);
 }

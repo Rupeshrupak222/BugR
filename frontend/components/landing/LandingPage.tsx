@@ -12,6 +12,7 @@ import { ServicesSection } from './ServicesSection';
 import './landing.css';
 import { InlineLab } from './InlineLab';
 import { RegistrationSection } from './RegistrationSection';
+import { ThemeToggle } from '../ThemeToggle';
 
 function Navigation({ onRegister }: { onRegister: (source: string) => void }) {
   const [open, setOpen] = useState(false);
@@ -45,13 +46,16 @@ function Navigation({ onRegister }: { onRegister: (source: string) => void }) {
             </a>
           ))}
         </nav>
-        <a
-          href="#signup"
-          className="liquid-glass landing-pill nav-signup"
-          onClick={() => onRegister('Sign Up')}
-        >
-          Sign Up <ArrowUpRight size={15} />
-        </a>
+        <div className="landing-nav-actions">
+          <ThemeToggle />
+          <a
+            href="#signup"
+            className="liquid-glass landing-pill nav-signup"
+            onClick={() => onRegister('Sign Up')}
+          >
+            Sign Up <ArrowUpRight size={15} />
+          </a>
+        </div>
         <button
           ref={trigger}
           className="landing-menu"
@@ -73,7 +77,7 @@ export function LandingPage() {
   const [source, setSource] = useState('Sign Up');
 
   return (
-    <div className="glass-landing bg-black text-white" id="top">
+    <div className="glass-landing" id="top">
       <section className="landing-hero">
         <QuietVideo name="hero" label="hero background" hero />
         <div className="hero-tint" />

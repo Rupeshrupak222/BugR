@@ -41,7 +41,14 @@
 .quiet-video img { z-index: 0; }
 .quiet-video video { z-index: 1; }
 .quiet-video[data-live='true'] img { visibility: hidden; }
-.quiet-video.hero-film { position: absolute; inset: 0; }
+.quiet-video.hero-film {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100% - 10px);
+}
 .hero-film img, .hero-film video {
   object-position: center bottom;
   transform: none;
@@ -188,7 +195,14 @@
   .hero-subtitle { font-size: 11px; }
   .manifesto { font-size: 10px; }
   .hero-film .film-control { right: 14px; bottom: 102px; min-height: 35px; padding: 7px 11px; font-size: 8px; }
-  .quiet-video.hero-film { position: absolute; inset: 0; }
+  .quiet-video.hero-film {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(100% - 10px);
+  }
   .hero-film img, .hero-film video {
     object-position: 50% bottom;
     transform: none;

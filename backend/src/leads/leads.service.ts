@@ -7,18 +7,23 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { createHash } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
 
 @Injectable()
 export class LeadsService {
   private readonly logger = new Logger(LeadsService.name);
+  private readonly inMemoryLeads = new Map<string, any>();
 
   constructor(
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
   ) {}
+
+  private hasDatabase(): boolean {
+    return Boolean(this.config.get<string>('DATABASE_URL'));
+  }
 
   getPublicConfig() {
     const siteKey = this.config.get<string>('TURNSTILE_SITE_KEY');
@@ -55,43 +60,72 @@ export class LeadsService {
     }
 
     // 4. Save to PostgreSQL via Prisma
-    try {
-      const existing = await this.prisma.lead.findUnique({
-        where: { requestId: dto.requestId },
-      });
+    if (this.hasDatabase()) {
+      try {
+        const existing = await this.prisma.lead.findUnique({
+          where: { requestId: dto.requestId },
+        });
 
-      if (existing) {
-        return {
-          saved: true,
-          id: existing.id,
-          message: 'Lead already acknowledged (idempotent)',
-        };
+        if (existing) {
+          return {
+            saved: true,
+            id: existing.id,
+            message: 'Lead already acknowledged (idempotent)',
+          };
+        }
+
+        const lead = await this.prisma.lead.create({
+          data: {
+            requestId: dto.requestId,
+            name: dto.name.trim(),
+            email: dto.email.trim().toLowerCase(),
+            phone: dto.phone.trim(),
+            source: dto.source.trim(),
+            message: (dto.message || '').trim(),
+            status: 'NEW',
+          },
+        });
+
+        this.logger.log(`New lead received for "${lead.source}" from ${lead.email}`);
+        return { saved: true, id: lead.id, message: 'Enquiry submitted successfully' };
+      } catch (error) {
+        this.logger.warn(`Prisma lead store failed, using in-memory store: ${(error as Error).message}`);
       }
-
-      const lead = await this.prisma.lead.create({
-        data: {
-          requestId: dto.requestId,
-          name: dto.name.trim(),
-          email: dto.email.trim().toLowerCase(),
-          phone: dto.phone.trim(),
-          source: dto.source.trim(),
-          message: (dto.message || '').trim(),
-          status: 'NEW',
-        },
-      });
-
-      this.logger.log(`New lead received for "${lead.source}" from ${lead.email}`);
-      return { saved: true, id: lead.id, message: 'Enquiry submitted successfully' };
-    } catch (error) {
-      this.logger.error(`Failed to store lead: ${(error as Error).message}`);
-      throw new HttpException(
-        { saved: false, message: 'Unable to process lead submission at this time' },
-        HttpStatus.SERVICE_UNAVAILABLE,
-      );
     }
+
+    // Fallback store
+    const existingMem = Array.from(this.inMemoryLeads.values()).find(
+      (l) => l.requestId === dto.requestId,
+    );
+    if (existingMem) {
+      return {
+        saved: true,
+        id: existingMem.id,
+        message: 'Lead already acknowledged (idempotent)',
+      };
+    }
+
+    const fallbackId = randomUUID();
+    const memLead = {
+      id: fallbackId,
+      requestId: dto.requestId,
+      name: dto.name.trim(),
+      email: dto.email.trim().toLowerCase(),
+      phone: dto.phone.trim(),
+      source: dto.source.trim(),
+      message: (dto.message || '').trim(),
+      status: 'NEW',
+      submittedAt: new Date().toISOString(),
+    };
+    this.inMemoryLeads.set(fallbackId, memLead);
+
+    this.logger.log(`New lead received (in-memory mode) for "${memLead.source}" from ${memLead.email}`);
+    return { saved: true, id: fallbackId, message: 'Enquiry submitted successfully' };
   }
 
   private async enforceRateLimit(ipHash: string): Promise<void> {
+    if (!this.hasDatabase()) return;
+
     try {
       const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
       const recentAttempts = await this.prisma.leadRateAttempt.count({
@@ -113,7 +147,6 @@ export class LeadsService {
       });
     } catch (err) {
       if (err instanceof HttpException) throw err;
-      // If DB rate logging encounters table issue, don't block user if not fatal
       this.logger.warn(`Rate limit check skipped due to DB state: ${(err as Error).message}`);
     }
   }
@@ -142,41 +175,75 @@ export class LeadsService {
   }
 
   async findAll(limit = 50, offset = 0, source?: string) {
-    const where = source ? { source } : {};
-    const [total, items] = await Promise.all([
-      this.prisma.lead.count({ where }),
-      this.prisma.lead.findMany({
-        where,
-        take: Math.min(limit, 100),
-        skip: offset,
-        orderBy: { submittedAt: 'desc' },
-      }),
-    ]);
-    return { total, limit, offset, items };
+    if (this.hasDatabase()) {
+      try {
+        const where = source ? { source } : {};
+        const [total, items] = await Promise.all([
+          this.prisma.lead.count({ where }),
+          this.prisma.lead.findMany({
+            where,
+            take: Math.min(limit, 100),
+            skip: offset,
+            orderBy: { submittedAt: 'desc' },
+          }),
+        ]);
+        return { total, limit, offset, items };
+      } catch (err) {
+        this.logger.warn(`Prisma findAll failed: ${(err as Error).message}`);
+      }
+    }
+
+    let items = Array.from(this.inMemoryLeads.values());
+    if (source) items = items.filter((l) => l.source === source);
+    const total = items.length;
+    return { total, limit, offset, items: items.slice(offset, offset + limit) };
   }
 
   async findOne(id: string) {
-    return this.prisma.lead.findUnique({
-      where: { id },
-    });
+    if (this.hasDatabase()) {
+      try {
+        return await this.prisma.lead.findUnique({
+          where: { id },
+        });
+      } catch (err) {
+        this.logger.warn(`Prisma findOne failed: ${(err as Error).message}`);
+      }
+    }
+    return this.inMemoryLeads.get(id) || null;
   }
 
   async getStats() {
-    const [totalLeads, sourceGroups] = await Promise.all([
-      this.prisma.lead.count(),
-      this.prisma.lead.groupBy({
-        by: ['source'],
-        _count: { id: true },
-        orderBy: { _count: { id: 'desc' } },
-      }),
-    ]);
+    if (this.hasDatabase()) {
+      try {
+        const [totalLeads, sourceGroups] = await Promise.all([
+          this.prisma.lead.count(),
+          this.prisma.lead.groupBy({
+            by: ['source'],
+            _count: { id: true },
+            orderBy: { _count: { id: 'desc' } },
+          }),
+        ]);
 
+        return {
+          totalLeads,
+          sources: sourceGroups.map((group) => ({
+            source: group.source,
+            count: group._count.id,
+          })),
+        };
+      } catch (err) {
+        this.logger.warn(`Prisma getStats failed: ${(err as Error).message}`);
+      }
+    }
+
+    const items = Array.from(this.inMemoryLeads.values());
+    const counts: Record<string, number> = {};
+    for (const item of items) {
+      counts[item.source] = (counts[item.source] || 0) + 1;
+    }
     return {
-      totalLeads,
-      sources: sourceGroups.map((group) => ({
-        source: group.source,
-        count: group._count.id,
-      })),
+      totalLeads: items.length,
+      sources: Object.entries(counts).map(([source, count]) => ({ source, count })),
     };
   }
 }

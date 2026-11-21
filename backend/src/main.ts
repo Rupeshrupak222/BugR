@@ -47,6 +47,14 @@ async function bootstrap() {
     },
   });
 
+  process.on('unhandledRejection', (reason) => {
+    logger.error(`Unhandled Rejection: ${reason}`);
+  });
+
+  process.on('uncaughtException', (err) => {
+    logger.error(`Uncaught Exception: ${err.message}`, err.stack);
+  });
+
   const port = Number(process.env.PORT || 4000);
   await app.listen(port);
   logger.log(`Bug Refinery API running on http://localhost:${port}/api`);

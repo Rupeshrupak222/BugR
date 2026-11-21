@@ -55,7 +55,7 @@ async function bootstrap() {
     logger.error(`Uncaught Exception: ${err.message}`, err.stack);
   });
 
-  const port = Number(process.env.PORT || 4000);
+  const port = Number(process.env.PORT || 4001);
   await app.listen(port);
   logger.log(`Bug Refinery API running on http://localhost:${port}/api`);
   logger.log(`Swagger OpenAPI Documentation available at http://localhost:${port}/api/docs`);

@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     // Forward to NestJS backend if available
     try {
-      const backendUrl = process.env.BACKEND_INTERNAL_URL || 'http://localhost:4000';
+      const backendUrl = process.env.BACKEND_INTERNAL_URL || 'http://localhost:4001';
       await fetch(`${backendUrl}/api/enquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -2,14 +2,20 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main, master, naveen]
+    branches: [main, master, naveen, feat/*]
   pull_request:
-    branches: [main, master]
+    branches: [main, master, naveen]
 
 jobs:
   test-and-build:
     name: Lint, Test & Build (Next.js + NestJS + Prisma)
     runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+      DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+      JWT_SECRET: "ci-test-jwt-secret-key-32chars-minimum"
+      NEXT_PUBLIC_API_URL: "https://bug-refinery-api.onrender.com"
 
     steps:
       - name: Checkout Code
@@ -21,13 +27,10 @@ jobs:
           node-version: 24
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 12.21.0
-          run_install: false
+        run: npm install -g pnpm@12.21.0
 
       - name: Install Monorepo Dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile=false
 
       - name: Generate Prisma Client (Backend)
         run: pnpm prisma:generate
@@ -43,5 +46,3 @@ jobs:
 
       - name: Build Frontend (Next.js)
         run: pnpm build:frontend
-        env:
-          NEXT_PUBLIC_API_URL: https://bug-refinery-api.onrender.com

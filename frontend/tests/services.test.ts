@@ -5,8 +5,8 @@ import { industriesData } from '../data/industries';
 import { processSteps } from '../data/process';
 
 describe('IT Services Data Integrity', () => {
-  it('should have all 6 approved core IT services', () => {
-    expect(servicesData.length).toBe(6);
+  it('should have all 8 approved core IT services', () => {
+    expect(servicesData.length).toBe(8);
     const expectedSlugs = [
       'custom-software-development',
       'web-development',
@@ -14,6 +14,8 @@ describe('IT Services Data Integrity', () => {
       'cloud-devops',
       'ai-automation',
       'cybersecurity-qa',
+      'api-development-integration',
+      'application-modernization-maintenance',
     ];
     servicesData.forEach((s) => {
       expect(expectedSlugs).toContain(s.slug);
@@ -43,9 +45,9 @@ describe('IT Services Data Integrity', () => {
     });
   });
 
-  it('should have the 7-step engineering delivery process', () => {
-    expect(processSteps.length).toBe(7);
+  it('should have the 8-step engineering delivery process', () => {
+    expect(processSteps.length).toBe(8);
     const stepNames = processSteps.map((s) => s.name);
-    expect(stepNames).toEqual(['Discover', 'Plan', 'Design', 'Develop', 'Test', 'Deploy', 'Support']);
+    expect(stepNames).toEqual(['Discover', 'Plan', 'UI/UX Design', 'Architecture', 'Develop', 'Test', 'Deploy', 'Support']);
   });
 });

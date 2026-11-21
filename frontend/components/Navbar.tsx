@@ -55,25 +55,25 @@ export function Navbar() {
         {/* Desktop Nav Links */}
         <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-700 dark:text-zinc-300">
           <Link
-            href="/services"
+            href="/it-services/services"
             className="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
           >
             Services
           </Link>
           <Link
-            href="/work"
+            href="/it-services/portfolio"
             className="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
           >
             Work
           </Link>
           <Link
-            href="/industries"
+            href="/it-services/industries"
             className="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
           >
             Industries
           </Link>
           <Link
-            href="/process"
+            href="/it-services/process"
             className="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
           >
             Process
@@ -88,13 +88,13 @@ export function Navbar() {
             </span>
           </Link>
           <Link
-            href="/about"
+            href="/it-services/about"
             className="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
           >
             About
           </Link>
           <Link
-            href="/contact"
+            href="/it-services/contact"
             className="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
           >
             Contact
@@ -110,7 +110,7 @@ export function Navbar() {
             </Link>
           </Button>
           <Button asChild variant="default" size="sm" className="rounded-full px-5 shadow-lg shadow-orange-500/20">
-            <Link href="/contact/project">
+            <Link href="/it-services/contact">
               <span>Start a Project</span>
               <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
             </Link>
@@ -144,32 +144,32 @@ export function Navbar() {
             IT Services & Solutions
           </div>
           <Link
-            href="/services"
+            href="/it-services/services"
             onClick={() => setMobileOpen(false)}
             className="block text-base font-medium text-slate-800 dark:text-zinc-200 hover:text-orange-600 dark:hover:text-orange-400"
           >
             Services Overview
           </Link>
           <Link
-            href="/work"
+            href="/it-services/portfolio"
             onClick={() => setMobileOpen(false)}
             className="block text-base font-medium text-slate-800 dark:text-zinc-200 hover:text-orange-600 dark:hover:text-orange-400"
           >
             Our Work / Portfolio
           </Link>
           <Link
-            href="/industries"
+            href="/it-services/industries"
             onClick={() => setMobileOpen(false)}
             className="block text-base font-medium text-slate-800 dark:text-zinc-200 hover:text-orange-600 dark:hover:text-orange-400"
           >
             Industries We Serve
           </Link>
           <Link
-            href="/process"
+            href="/it-services/process"
             onClick={() => setMobileOpen(false)}
             className="block text-base font-medium text-slate-800 dark:text-zinc-200 hover:text-orange-600 dark:hover:text-orange-400"
           >
-            7-Step Delivery Process
+            8-Step Delivery Process
           </Link>
 
           <div className="border-t border-black/10 dark:border-white/10 pt-4 text-[11px] font-mono text-slate-400 dark:text-zinc-500 uppercase tracking-wider mb-2">
@@ -197,23 +197,23 @@ export function Navbar() {
             For Companies
           </Link>
           <Link
-            href="/about"
+            href="/it-services/about"
             onClick={() => setMobileOpen(false)}
             className="block text-base font-medium text-slate-700 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white"
           >
-            About
+            About IT Services
           </Link>
           <Link
-            href="/contact"
+            href="/it-services/contact"
             onClick={() => setMobileOpen(false)}
             className="block text-base font-medium text-slate-700 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white"
           >
-            Contact Support
+            Contact & Brief Builder
           </Link>
 
           <div className="pt-4 space-y-2 border-t border-black/10 dark:border-white/10">
             <Button asChild className="w-full">
-              <Link href="/contact/project" onClick={() => setMobileOpen(false)}>
+              <Link href="/it-services/contact" onClick={() => setMobileOpen(false)}>
                 Start a Project / RFP
               </Link>
             </Button>

@@ -321,4 +321,98 @@ export const servicesData: ServiceItem[] = [
       },
     ],
   },
+  {
+    id: 'api-integration',
+    slug: 'api-development-integration',
+    title: 'API Development & Systems Integration',
+    category: 'Architecture & Integration',
+    shortDesc: 'High-throughput RESTful, GraphQL, and event-driven API gateways connecting disparate enterprise platforms, payment processors, and legacy systems.',
+    valueProposition: 'Eliminate corporate data silos, automate inter-system workflows, and build rock-solid API ecosystems with sub-millisecond latencies, OAuth2 security, and 99.99% uptime.',
+    businessOutcomes: [
+      'Seamless bi-directional data synchronization across CRM, ERP, billing, and inventory',
+      'Reduce partner onboarding cycle times from months to days with clean OpenAPI specs',
+      'Eliminate manual data re-entry errors through automated event triggers and webhooks',
+      'Resilient throttling and queue buffering during unpredictable traffic spikes',
+    ],
+    capabilities: [
+      {
+        title: 'Enterprise API Gateways & Edge Routing',
+        description: 'Centralized API gateway architecture managing SSL termination, rate limiting, token introspection, and path routing.',
+      },
+      {
+        title: 'Enterprise ERP & CRM Connectors',
+        description: 'Hardened integrations with Salesforce, SAP, Oracle NetSuite, HubSpot, and custom internal SQL databases.',
+      },
+      {
+        title: 'Event-Driven Webhook Infrastructures',
+        description: 'Scalable webhook processing pipelines backed by Redis queues and dead-letter queues (DLQs) to prevent lost events.',
+      },
+      {
+        title: 'Financial & Payment Engine Integration',
+        description: 'PCI-compliant payment gateways, automated invoicing, multi-currency conversions, and idempotent transaction handling (Stripe, Razorpay, Adyen).',
+      },
+    ],
+    problemSolved: 'Enterprises struggle with fragmented software stacks where customer, product, and financial data are trapped in separate silos, forcing manual copying and causing data mismatches.',
+    solutionApproach: 'We design decoupled integration architectures using contract-first OpenAPI schemas, message queues for asynchronous buffering, and idempotent retry strategies for zero data loss.',
+    deliverables: [
+      'Production-tested API Gateway with JWT/OAuth2 authentication and rate limiting',
+      'Interactive Swagger / OpenAPI 3.0 documentation portal',
+      'Automated integration test suites simulating third-party downtime and latency',
+      'Telemetry dashboards monitoring API response codes, p99 latencies, and error rates',
+    ],
+    techStack: ['NestJS', 'FastAPI', 'Node.js', 'GraphQL', 'Kafka', 'RabbitMQ', 'Redis', 'PostgreSQL', 'Docker'],
+    faqs: [
+      {
+        question: 'How do you handle third-party API rate limits and unexpected downtime?',
+        answer: 'We implement circuit breaker patterns, exponential backoff with jitter, Redis-backed message queues, and dead-letter queues so requests are safely queued and retried without data loss.',
+      },
+    ],
+  },
+  {
+    id: 'application-modernization',
+    slug: 'application-modernization-maintenance',
+    title: 'Application Modernization & Maintenance',
+    category: 'Modernization & Support',
+    shortDesc: 'Deconstruct fragile monolithic software into modern containerized services, eliminate technical debt, and ensure 24/7 SLA reliability.',
+    valueProposition: 'Breathe new life into mission-critical legacy applications with incremental refactoring, cloud containerization, database optimization, and guaranteed uptime support.',
+    businessOutcomes: [
+      'Reduce cloud hosting and maintenance overhead by up to 50%',
+      'Eliminate software crashes and memory leaks with modern runtime upgrades',
+      'Enable rapid feature releases without fearing fragile legacy codebase regressions',
+      'Extend the operational lifecycle of core proprietary systems by 5+ years',
+    ],
+    capabilities: [
+      {
+        title: 'Strangler Fig Monolith Deconstruction',
+        description: 'Safely extract high-value business domains into standalone services without high-risk total system rewrites.',
+      },
+      {
+        title: 'Runtime & Framework Upgrades',
+        description: 'Modernizing outdated Node.js, Python, PHP, or Java versions to modern LTS runtimes with patched security vulnerabilities.',
+      },
+      {
+        title: 'Database Schema & Query Optimization',
+        description: 'Index tuning, query optimization, connection pooling with PgBouncer, and zero-downtime schema migrations.',
+      },
+      {
+        title: '24/7 SLA Application Support',
+        description: 'Guaranteed response times, proactive security patching, bug triage, and continuous performance tuning.',
+      },
+    ],
+    problemSolved: 'Legacy systems slow down business growth, run on deprecated frameworks with unpatched CVE security vulnerabilities, and crash during peak business traffic.',
+    solutionApproach: 'We conduct a comprehensive code audit, apply the Strangler Fig pattern for incremental modernization, containerize workloads, and wrap legacy endpoints with modern automated test harnesses.',
+    deliverables: [
+      'Comprehensive Technical Debt & Architectural Audit Report',
+      'Containerized Docker/Kubernetes deployment manifests',
+      'Zero-downtime database migration scripts',
+      'Formal Service Level Agreement (SLA) with guaranteed response times',
+    ],
+    techStack: ['Docker', 'Kubernetes', 'TypeScript', 'Node.js LTS', 'PostgreSQL', 'Prisma', 'Terraform', 'Datadog'],
+    faqs: [
+      {
+        question: 'Can you modernize our application without interrupting live customer operations?',
+        answer: 'Yes. We employ the Strangler Fig pattern and dual-write database strategies, gradually routing live traffic to modernized components while the legacy system continues operating safely.',
+      },
+    ],
+  },
 ];

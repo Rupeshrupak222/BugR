@@ -37,33 +37,43 @@ export function Footer() {
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-900 dark:text-white">IT Services</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <Link href="/services/custom-software-development" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                <Link href="/it-services/services/custom-software-development" className="hover:text-slate-950 dark:hover:text-white transition-colors">
                   Custom Software
                 </Link>
               </li>
               <li>
-                <Link href="/services/web-development" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                <Link href="/it-services/services/web-development" className="hover:text-slate-950 dark:hover:text-white transition-colors">
                   Web & SaaS Apps
                 </Link>
               </li>
               <li>
-                <Link href="/services/mobile-app-development" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                <Link href="/it-services/services/mobile-app-development" className="hover:text-slate-950 dark:hover:text-white transition-colors">
                   Mobile Development
                 </Link>
               </li>
               <li>
-                <Link href="/services/cloud-devops" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                <Link href="/it-services/services/cloud-devops" className="hover:text-slate-950 dark:hover:text-white transition-colors">
                   Cloud & DevOps
                 </Link>
               </li>
               <li>
-                <Link href="/services/ai-automation" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                <Link href="/it-services/services/ai-automation" className="hover:text-slate-950 dark:hover:text-white transition-colors">
                   AI & Automation
                 </Link>
               </li>
               <li>
-                <Link href="/services/cybersecurity-qa" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                <Link href="/it-services/services/cybersecurity-qa" className="hover:text-slate-950 dark:hover:text-white transition-colors">
                   Cybersecurity & QA
+                </Link>
+              </li>
+              <li>
+                <Link href="/it-services/services/api-development-integration" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                  API Integration
+                </Link>
+              </li>
+              <li>
+                <Link href="/it-services/services/application-modernization-maintenance" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                  Modernization & Maintenance
                 </Link>
               </li>
             </ul>
@@ -73,18 +83,18 @@ export function Footer() {
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-900 dark:text-white">Company & Work</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <Link href="/work" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                <Link href="/it-services/portfolio" className="hover:text-slate-950 dark:hover:text-white transition-colors">
                   Our Work & Systems
                 </Link>
               </li>
               <li>
-                <Link href="/industries" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                <Link href="/it-services/industries" className="hover:text-slate-950 dark:hover:text-white transition-colors">
                   Industries We Serve
                 </Link>
               </li>
               <li>
-                <Link href="/process" className="hover:text-slate-950 dark:hover:text-white transition-colors">
-                  7-Step Process
+                <Link href="/it-services/process" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                  8-Step Delivery Process
                 </Link>
               </li>
               <li>
@@ -93,12 +103,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-slate-950 dark:hover:text-white transition-colors">
-                  About Us
+                <Link href="/it-services/about" className="hover:text-slate-950 dark:hover:text-white transition-colors">
+                  About Bug Refinery
                 </Link>
               </li>
               <li>
-                <Link href="/contact/project" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-medium transition-colors">
+                <Link href="/it-services/contact" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-medium transition-colors">
                   Start a Project / RFP &rarr;
                 </Link>
               </li>

@@ -32,6 +32,7 @@ async function bootstrap() {
     )
     .setVersion('1.0.0')
     .addTag('leads', 'Prospect and student lead capture with rate limiting & deduplication')
+    .addTag('enquiries', 'Enterprise B2B IT project enquiries and RFP submissions')
     .addTag('auth', 'JWT authentication and user session management')
     .addTag('storage', 'Supabase object storage integration for files and resumes')
     .addTag('health', 'Health checks and runtime status')

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { EnquiriesModule } from './enquiries/enquiries.module';
 import { HealthController } from './health/health.controller';
 import { LeadsModule } from './leads/leads.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -14,6 +15,7 @@ import { StorageModule } from './storage/storage.module';
     }),
     PrismaModule,
     LeadsModule,
+    EnquiriesModule,
     AuthModule,
     StorageModule,
   ],

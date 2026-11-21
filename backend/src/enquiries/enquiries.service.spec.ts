@@ -1,4 +1,5 @@
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from '../prisma/prisma.service';
 import { EnquiriesService } from './enquiries.service';
@@ -16,11 +17,19 @@ describe('EnquiriesService', () => {
     },
   };
 
+  const mockConfig = {
+    get: jest.fn((key: string) => {
+      if (key === 'DATABASE_URL') return 'postgresql://mock';
+      return null;
+    }),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         EnquiriesService,
         { provide: PrismaService, useValue: mockPrisma },
+        { provide: ConfigService, useValue: mockConfig },
       ],
     }).compile();
 
@@ -93,6 +102,23 @@ describe('EnquiriesService', () => {
     });
 
     expect(result.id).toBe('existing-uuid');
+    expect(mockPrisma.projectEnquiry.create).not.toHaveBeenCalled();
+  });
+
+  it('should handle in-memory mode when DATABASE_URL is not set', async () => {
+    mockConfig.get.mockReturnValueOnce(null); // DATABASE_URL = null
+
+    const result = await service.createEnquiry({
+      requestId: 'req-offline',
+      name: 'Offline Lead',
+      email: 'offline@test.com',
+      company: 'Offline Co',
+      serviceCategory: 'web-development',
+      description: 'Working without database configured.',
+    });
+
+    expect(result.id).toBeDefined();
+    expect(result.status).toBe('NEW');
     expect(mockPrisma.projectEnquiry.create).not.toHaveBeenCalled();
   });
 });
